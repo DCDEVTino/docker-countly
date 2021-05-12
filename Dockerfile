@@ -1,12 +1,12 @@
-FROM base
+FROM FROM phusion/baseimage:0.1
 
 env   DEBIAN_FRONTEND noninteractive
 
 # REPOS
 run    apt-get install -y software-properties-common
 run    add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
-run    add-apt-repository -y ppa:chris-lea/node.js
-run    add-apt-repository -y ppa:nginx/stable
+run    add-apt-repository -y "deb https://nginx.org/packages/ubuntu/ xenial nginx"
+run    add-apt-repository -y "deb-src https://nginx.org/packages/ubuntu/ xenial nginx"
 run    apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
 run    echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | tee /etc/apt/sources.list.d/10gen.list
 run    apt-get --yes update
@@ -20,8 +20,17 @@ run    ln -s /bin/true /sbin/initctl
 run    apt-get install -y -q curl git wget
 
 ## MONGO
-run    mkdir -p /data/db
+run    mkdir -p var/lib/mongodb
 run    apt-get install -y -q mongodb-10gen
+run    mkdir /etc/service/mongodb && 
+run    mkdir /etc/service/nginx && 
+run    mkdir /etc/service/countly-api
+run    mkdir /etc/service/countly-dashboard
+run    echo "" >> /etc/nginx/nginx.conf
+run    echo "daemon off;" >> /etc/nginx/nginx.conf
+run    chown mongodb /etc/service/mongodb/run
+run    chown root /etc/service/nginx/run
+run    chown -R countly:countly /opt/countly
 
 ## NODE
 run    apt-get install -y -q nodejs
@@ -31,11 +40,11 @@ env   DEBIAN_FRONTEND dialog
 run    apt-get --yes install supervisor imagemagick nginx build-essential  --force-yes
 
 ## Setup Countly
-run    mkdir -p /data/log
+run    mkdir -p var/data/log
 run    cd /opt; git clone https://github.com/Countly/countly-server.git countly --depth 1
 run    cd /opt/countly/api ; npm install time 
 run    rm /etc/nginx/sites-enabled/default
-run    cp  /opt/countly/bin/config/nginx.server.conf /etc/nginx/sites-enabled/default
+run    cp /opt/countly/bin/config/nginx.server.conf /etc/nginx/sites-enabled/default
 
 run    cp  /opt/countly/frontend/express/public/javascripts/countly/countly.config.sample.js  /opt/countly/frontend/express/public/javascripts/countly/countly.config.js
 run    cp  /opt/countly/api/config.sample.js  /opt/countly/api/config.js
