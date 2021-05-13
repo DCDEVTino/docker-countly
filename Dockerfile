@@ -5,7 +5,6 @@ env  INSIDE_DOCKER 1
 EXPOSE 80
 
 # REPOS
-run    apt-get install -y software-properties-common
 run    add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
 run    add-apt-repository -y "deb https://nginx.org/packages/ubuntu/ xenial nginx"
 run    add-apt-repository -y "deb-src https://nginx.org/packages/ubuntu/ xenial nginx"
