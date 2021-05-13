@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.1
+FROM ubuntu:20.04
 
 env  INSIDE_DOCKER 1
 
