@@ -1,6 +1,8 @@
 FROM FROM phusion/baseimage:0.1
 
-env   DEBIAN_FRONTEND noninteractive
+env  INSIDE_DOCKER 1
+
+EXPOSE 80
 
 # REPOS
 run    apt-get install -y software-properties-common
