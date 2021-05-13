@@ -1,4 +1,4 @@
-FROM FROM phusion/baseimage:0.1
+FROM phusion/baseimage:0.1
 
 env  INSIDE_DOCKER 1
 
