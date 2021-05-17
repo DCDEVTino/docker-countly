@@ -20,10 +20,11 @@ run    dpkg-divert --local --rename --add /sbin/initctl
 run    ln -s /bin/true /sbin/initctl
 
 # TOOLS
-run    apt-get install -y -q curl git wget
+run    apt-get install -y -q curl git wget unzip
 
 ## MONGO
 run    mkdir -p var/lib/mongodb
+run    mkdir /etc/nginx/ssl
 run    apt-get install -y -q mongodb-10gen
 run    mkdir /etc/service/mongodb && 
 run    mkdir /etc/service/nginx && 
