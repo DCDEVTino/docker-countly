@@ -2,8 +2,6 @@ FROM ubuntu:20.04
 
 CMD ["/sbin/my_init"]
 
-FROM ubuntu:20.04
-
 env  INSIDE_DOCKER 1
 
 EXPOSE 80
