@@ -6,10 +6,6 @@ env  INSIDE_DOCKER 1
 
 EXPOSE 80
 
-#SHIMS
-run    dpkg-divert --local --rename --add /sbin/initctl
-run    ln -s /bin/true /sbin/initctl
-
 # TOOLS
 run    apt-get install -y -q curl git wget
 
