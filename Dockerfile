@@ -11,10 +11,6 @@ EXPOSE 80
 run    apt-get --yes update
 run    apt-get --yes upgrade --force-yes
 
-#SHIMS
-run    dpkg-divert --local --rename --add /sbin/initctl
-run    ln -s /bin/true /sbin/initctl
-
 # TOOLS
 run    apt-get install -y -q curl git wget unzip
 
