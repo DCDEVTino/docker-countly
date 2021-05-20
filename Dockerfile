@@ -6,9 +6,6 @@ env  INSIDE_DOCKER 1
 
 EXPOSE 80
 
-# TOOLS
-run    apt-get install -y -q curl git wget
-
 ## MONGO
 run    mkdir -p var/lib/mongodb
 run    mkdir /etc/nginx/ssl
