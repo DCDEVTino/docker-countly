@@ -12,7 +12,6 @@ EXPOSE 80
 # REPOS
 run    sudo apt install dirmngr gnupg apt-transport-https ca-certificates software-properties-common
 run    wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
-run    echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | tee /etc/apt/sources.list.d/10gen.list
 run    apt-get --yes update
 run    apt-get --yes upgrade --force-yes
 
