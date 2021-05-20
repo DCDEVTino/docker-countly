@@ -10,7 +10,7 @@ For more information on Countly and check out it's [website][1].
 Running this will build you a docker image with the latest stable version of both
 docker-countly and County itself.
 
-    sudo docker build -t DCDEVTino/docker-countly https://github.com/DCDEVTino/docker-countly.git
+    sudo docker build -t docker-countly https://github.com/DCDEVTino/docker-countly.git
 
 
 ## Running docker-countly
@@ -22,7 +22,7 @@ is the only thing running on your system you can map the port to 80 and no
 proxy is needed. i.e. `-p=80:80` Also be sure your mounted directory on your
 host machine is already created before running this `mkdir -p /mnt/countly`.
 
-    sudo docker run  -d -p=10000:80 -v=/mnt/countly:/data dz0ny/countly
+    sudo docker run  -d -p=10000:80 -v=/mnt/countly:/data DCDEVTino/docker-countly
 
 From now on when you start/stop docker-countly you should use the container id
 with the following commands. To get your container id, after you initial run
@@ -35,7 +35,7 @@ name which is `dz0ny/countly:latest`.
 ### Notes on the run command
 
  + `-v` is the volume you are mounting `-v=host_dir:docker_dir`
- + `DCDEVTino/docker-countly` is simply what I called my docker build of this image
+ + `docker-countly` is simply what I called my docker build of this image
  + `-d=true` allows this to run cleanly as a daemon, remove for debugging
  + `-p` is the port it connects to, `-p=host_port:docker_port`
 
