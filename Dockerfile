@@ -5,10 +5,6 @@ CMD ["/sbin/my_init"]
 env  INSIDE_DOCKER 1
 
 EXPOSE 80
-# REPOS
-run    echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | tee /etc/apt/sources.list.d/10gen.list
-run    apt-get --yes update
-run    apt-get --yes upgrade 
 
 #SHIMS
 run    dpkg-divert --local --rename --add /sbin/initctl
