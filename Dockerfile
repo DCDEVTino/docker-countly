@@ -6,6 +6,7 @@ env  INSIDE_DOCKER 1
 
 EXPOSE 80
 
+
 # REPOS
 run    add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
 run    add-apt-repository -y "deb https://nginx.org/packages/ubuntu/ xenial nginx"
@@ -36,14 +37,18 @@ run    chown mongodb /etc/service/mongodb/run
 run    chown root /etc/service/nginx/run
 run    chown -R countly:countly /opt/countly
 
+
 ## NODE
 run    apt-get install -y -q nodejs
 env   DEBIAN_FRONTEND dialog
 
-## County required
+## Countly required
 run    apt-get --yes install supervisor imagemagick nginx build-essential  --force-yes
 
 ## Setup Countly
+RUN useradd -r -M -U -d /opt/countly -s /bin/false countly && \
+        echo "countly ALL=(ALL) NOPASSWD: /usr/bin/sv restart countly-api countly-dashboard" >> /etc/sudoers.d/countly && \
+        /opt/countly/bin/countly.install.sh
 run    mkdir -p var/data/log
 run    cd /opt; git clone https://github.com/Countly/countly-server.git countly --depth 1
 run    cd /opt/countly/api ; npm install time 
@@ -59,6 +64,14 @@ add    ./supervisor/conf.d/nginx.conf /etc/supervisor/conf.d/nginx.conf
 add    ./supervisor/conf.d/mongodb.conf /etc/supervisor/conf.d/mongodb.conf
 add    ./supervisor/conf.d/countly.conf /etc/supervisor/conf.d/countly.conf
 
+# Add services' run scripts
+ADD ./bin/commands/docker/mongodb.sh /etc/service/mongodb/run
+ADD ./bin/commands/docker/nginx.sh /etc/service/nginx/run
+ADD ./bin/commands/docker/countly-api.sh /etc/service/countly-api/run
+ADD ./bin/commands/docker/countly-dashboard.sh /etc/service/countly-dashboard/run
+
+
 expose :80
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 volume ["/data"]
 ENTRYPOINT ["/usr/bin/supervisord"]
