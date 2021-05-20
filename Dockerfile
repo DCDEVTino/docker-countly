@@ -24,7 +24,7 @@ run    apt-get install -y -q curl git wget
 
 ## MONGO
 run    mkdir -p /data/db
-run    apt-get install -y -q mongodb-10gen
+run    apt-get install -y -q mongodb
 
 ## NODE
 run    apt-get install -y -q nodejs
