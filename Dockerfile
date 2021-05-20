@@ -1,7 +1,6 @@
 
 FROM ubuntu:20.04
 
-
 CMD ["/sbin/my_init"]
 
 ## Setup Countly
