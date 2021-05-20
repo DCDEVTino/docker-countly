@@ -1,7 +1,14 @@
 
 FROM ubuntu:20.04
 
-env   DEBIAN_FRONTEND noninteractive
+
+CMD ["/sbin/my_init"]
+
+## Setup Countly
+ENV INSIDE_DOCKER 1
+
+EXPOSE 80
+
 
 # REPOS
 run    sudo apt install dirmngr gnupg apt-transport-https ca-certificates software-properties-common
