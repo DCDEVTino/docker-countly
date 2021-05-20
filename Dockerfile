@@ -12,15 +12,18 @@ EXPOSE 80
 # REPOS
 run    sudo apt install dirmngr gnupg apt-transport-https ca-certificates software-properties-common
 run    wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
-run    apt-get --yes update
-run    apt-get --yes upgrade --force-yes
+run    sudo apt-get update
+run    sudo apt-get -y upgrade
 
 #SHIMS
 run    dpkg-divert --local --rename --add /sbin/initctl
 run    ln -s /bin/true /sbin/initctl
 
 # TOOLS
-run    apt-get install -y -q curl git wget
+run    sudo apt-get install git
+run    sudo apt-get install wget
+run    sudo apt-get install unzip
+run    sudo apt-get install docker-compose 
 
 ## MONGO
 run    mkdir -p /data/db
