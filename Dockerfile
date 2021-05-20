@@ -8,11 +8,6 @@ EXPOSE 80
 
 
 # REPOS
-run    add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
-run    add-apt-repository -y "deb https://nginx.org/packages/ubuntu/ xenial nginx"
-run    add-apt-repository -y "deb-src https://nginx.org/packages/ubuntu/ xenial nginx"
-run    apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
-run    echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | tee /etc/apt/sources.list.d/10gen.list
 run    apt-get --yes update
 run    apt-get --yes upgrade --force-yes
 
