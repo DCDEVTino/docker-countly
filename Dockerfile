@@ -8,7 +8,6 @@ EXPOSE 80
 
 ## MONGO
 run    mkdir -p var/lib/mongodb
-run    mkdir /etc/nginx/ssl
 run    apt-get install -y -q mongodb-10gen
 run    mkdir /etc/service/mongodb && 
 run    mkdir /etc/service/nginx && 
