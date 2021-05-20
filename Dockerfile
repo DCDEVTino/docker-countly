@@ -6,10 +6,6 @@ env  INSIDE_DOCKER 1
 
 EXPOSE 80
 # REPOS
-run    add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
-run    add-apt-repository -y ppa:chris-lea/node.js
-run    add-apt-repository -y ppa:nginx/stable
-run    apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
 run    echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | tee /etc/apt/sources.list.d/10gen.list
 run    apt-get --yes update
 run    apt-get --yes upgrade 
