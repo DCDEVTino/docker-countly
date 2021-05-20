@@ -6,7 +6,6 @@ env  INSIDE_DOCKER 1
 
 EXPOSE 80
 # REPOS
-run    apt-get install -y software-properties-common
 run    add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
 run    add-apt-repository -y ppa:chris-lea/node.js
 run    add-apt-repository -y ppa:nginx/stable
