@@ -35,7 +35,7 @@ name which is `dz0ny/countly:latest`.
 ### Notes on the run command
 
  + `-v` is the volume you are mounting `-v=host_dir:docker_dir`
- + `dz0ny/countly` is simply what I called my docker build of this image
+ + `DCDEVTino/docker-countly` is simply what I called my docker build of this image
  + `-d=true` allows this to run cleanly as a daemon, remove for debugging
  + `-p` is the port it connects to, `-p=host_port:docker_port`
 
