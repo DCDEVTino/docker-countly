@@ -10,7 +10,8 @@ EXPOSE 80
 
 
 # REPOS
-run    wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+
+run    sudo wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
 run    sudo apt-get update
 run    sudo apt-get -y upgrade
 
@@ -25,18 +26,18 @@ run    sudo apt-get install unzip
 run    sudo apt-get install docker-compose 
 
 ## MONGO
-run    mkdir -p /data/db
-run    apt-get install -y -q mongodb
+run    sudo mkdir -p /data/db
+run    sudo apt-get install -y -q mongodb
 
 ## NODE
-run    apt-get install -y -q nodejs
+run   sudo apt-get install -y -q nodejs
 env   DEBIAN_FRONTEND dialog
 
 ## County required
-run    apt-get --yes install supervisor imagemagick nginx build-essential  --force-yes
+run    sudo apt-get --yes install supervisor imagemagick nginx build-essential  --force-yes
 
 ## Setup Countly
-run    mkdir -p /data/log
+run   sudo mkdir -p /data/log
 run    cd /opt; git clone https://github.com/Countly/countly-server.git countly --depth 1
 run    cd /opt/countly/api ; npm install time 
 run    rm /etc/nginx/sites-enabled/default
