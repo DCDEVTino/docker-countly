@@ -8,47 +8,47 @@ ENV INSIDE_DOCKER 1
 EXPOSE 80
 
 # TOOLS
-run    apt-get install -y git
-run    apt-get install -y wget
-run    apt-get install -y unzip
-run    apt-get install -y docker-compose 
+run apt-get install -y git
+run apt-get install -y wget
+run apt-get install -y unzip
+run apt-get install -y docker-compose 
 
 #REPOS
-run    wget -qO- https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+run wget -qO- https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
 
 
 #SHIMS
-run   dpkg-divert --local --rename --add /sbin/initctl
-run   ln -sf /bin/true /sbin/initctl
+run  dpkg-divert --local --rename --add /sbin/initctl
+run  ln -sf /bin/true /sbin/initctl
 
 
 
 ## MONGO
-run    mkdir -p /data/db
-run    apt-get install -y -q mongodb
+run mkdir -p /data/db
+run apt-get install -y -q mongodb
 
 ## NODE
-run   apt-get install -y -q nodejs
-env   DEBIAN_FRONTEND dialog
+run apt-get install -y -q nodejs
+env DEBIAN_FRONTEND dialog
 
 ## County required
-run    apt-get --yes install supervisor imagemagick nginx build-essential  --force-yes
+run apt-get --yes install supervisor imagemagick nginx build-essential  --force-yes
 
 ## Setup Countly
-run   mkdir -p /data/log
-run    cd /opt; git clone https://github.com/Countly/countly-server.git countly --depth 1
-run    cd /opt/countly/api ; npm install time 
-run    rm /etc/nginx/sites-enabled/default
-run    cp  /opt/countly/bin/config/nginx.server.conf /etc/nginx/sites-enabled/default
+run mkdir -p /data/log
+run cd /opt; git clone https://github.com/Countly/countly-server.git countly --depth 1
+run cd /opt/countly/api ; npm install time 
+run rm /etc/nginx/sites-enabled/default
+run cp /opt/countly/bin/config/nginx.server.conf /etc/nginx/sites-enabled/default
 
-run    cp  /opt/countly/frontend/express/public/javascripts/countly/countly.config.sample.js  /opt/countly/frontend/express/public/javascripts/countly/countly.config.js
-run    cp  /opt/countly/api/config.sample.js  /opt/countly/api/config.js
-run    cp  /opt/countly/frontend/express/config.sample.js  /opt/countly/frontend/express/config.js
+run cp /opt/countly/frontend/express/public/javascripts/countly/countly.config.sample.js  /opt/countly/frontend/express/public/javascripts/countly/countly.config.js
+run cp /opt/countly/api/config.sample.js  /opt/countly/api/config.js
+run cp /opt/countly/frontend/express/config.sample.js  /opt/countly/frontend/express/config.js
 
-add    ./supervisor/supervisord.conf /etc/supervisor/supervisord.conf
-add    ./supervisor/conf.d/nginx.conf /etc/supervisor/conf.d/nginx.conf
-add    ./supervisor/conf.d/mongodb.conf /etc/supervisor/conf.d/mongodb.conf
-add    ./supervisor/conf.d/countly.conf /etc/supervisor/conf.d/countly.conf
+add ./supervisor/supervisord.conf /etc/supervisor/supervisord.conf
+add ./supervisor/conf.d/nginx.conf /etc/supervisor/conf.d/nginx.conf
+add ./supervisor/conf.d/mongodb.conf /etc/supervisor/conf.d/mongodb.conf
+add ./supervisor/conf.d/countly.conf /etc/supervisor/conf.d/countly.conf
 
 expose :80
 volume ["/data"]
