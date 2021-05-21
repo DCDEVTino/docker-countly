@@ -8,11 +8,6 @@ ENV INSIDE_DOCKER 1
 
 EXPOSE 80
 
-
-# REPOS
-run    sudo apt-get update
-run    sudo apt-get -y upgrade
-
 #SHIMS
 run    dpkg-divert --local --rename --add /sbin/initctl
 run    ln -s /bin/true /sbin/initctl
