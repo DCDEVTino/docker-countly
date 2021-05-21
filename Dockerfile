@@ -7,19 +7,24 @@ ENV INSIDE_DOCKER 1
 
 EXPOSE 80
 
+run add-apt-repository -y nginx:nginx/stable
+run apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+run echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+run apt-get --yes update
+run apt-get --yes upgrade --force-yes
+
 
 #SHIMS
 run  dpkg-divert --local --rename --add /sbin/initctl
 run  ln -sf /bin/true /sbin/initctl
 
 
-
 ## MONGO
 run mkdir -p /data/db
-run apt install mongodb
+run apt-get --yes install mongodb
 
 ## NODE
-run apt-get install -y -q nodejs
+run apt-get --yes install -q nodejs
 env DEBIAN_FRONTEND dialog
 
 ## County required
