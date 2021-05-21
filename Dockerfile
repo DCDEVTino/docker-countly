@@ -10,8 +10,6 @@ EXPOSE 80
 
 
 # REPOS
-
-run    sudo wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
 run    sudo apt-get update
 run    sudo apt-get -y upgrade
 
