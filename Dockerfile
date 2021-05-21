@@ -26,10 +26,16 @@ run mkdir -p /data/db
 run apt-get --yes install mongodb
 
 ## NODE
-run apt-get --yes install -q nodejs
+run apt-get --yes install nodejs
+run apt-get install gcc g++ make
 env DEBIAN_FRONTEND dialog
 
-## County required
+## YARN 
+run curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
+run echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+run apt-get update && sudo apt-get install yarn
+
+## Countly required
 run apt-get --yes install supervisor imagemagick nginx build-essential  --force-yes
 
 ## Setup Countly
