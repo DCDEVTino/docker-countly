@@ -16,10 +16,10 @@ run  ln -sf /bin/true /sbin/initctl
 
 ## MONGO
 run mkdir -p /data/db
-run apt-get install -y -q mongodb
+run sudo apt install -y mongodb
 
 ## NODE
-run apt-get install -y -q nodejs
+run sudo apt-get install -y -q nodejs
 env DEBIAN_FRONTEND dialog
 
 ## County required
