@@ -6,11 +6,13 @@ CMD ["/sbin/my_init"]
 ENV INSIDE_DOCKER 1
 
 EXPOSE 80
+
+run apt-get --yes update
+run apt-get --yes upgrade --force-yes
 run apt-get --yes install git
 run apt-get --yes install docker-compose
 run apt-get --yes install wget
-run apt-get --yes update
-run apt-get --yes upgrade --force-yes
+
 
 
 #SHIMS
