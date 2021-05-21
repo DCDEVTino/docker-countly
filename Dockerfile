@@ -8,28 +8,28 @@ ENV INSIDE_DOCKER 1
 EXPOSE 80
 
 #SHIMS
-run   sudo dpkg-divert --local --rename --add /sbin/initctl
-run   sudo ln -s /bin/true /sbin/initctl
+run   dpkg-divert --local --rename --add /sbin/initctl
+run   ln -s /bin/true /sbin/initctl
 
 # TOOLS
-run    sudo apt-get install git
-run    sudo apt-get install wget
-run    sudo apt-get install unzip
-run    sudo apt-get install docker-compose 
+run    apt-get install git
+run    apt-get install wget
+run    apt-get install unzip
+run    apt-get install docker-compose 
 
 ## MONGO
-run    sudo mkdir -p /data/db
-run    sudo apt-get install -y -q mongodb
+run    mkdir -p /data/db
+run    apt-get install -y -q mongodb
 
 ## NODE
-run   sudo apt-get install -y -q nodejs
+run   apt-get install -y -q nodejs
 env   DEBIAN_FRONTEND dialog
 
 ## County required
-run    sudo apt-get --yes install supervisor imagemagick nginx build-essential  --force-yes
+run    apt-get --yes install supervisor imagemagick nginx build-essential  --force-yes
 
 ## Setup Countly
-run   sudo mkdir -p /data/log
+run   mkdir -p /data/log
 run    cd /opt; git clone https://github.com/Countly/countly-server.git countly --depth 1
 run    cd /opt/countly/api ; npm install time 
 run    rm /etc/nginx/sites-enabled/default
