@@ -9,6 +9,7 @@ EXPOSE 80
 
 run apt-get --yes update
 run apt-get --yes upgrade --force-yes
+run apt-get --yes install apt-utils
 run apt-get --yes install git
 run apt-get --yes install docker-compose
 run apt-get --yes install wget
