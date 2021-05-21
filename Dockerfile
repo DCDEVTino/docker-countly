@@ -7,9 +7,6 @@ ENV INSIDE_DOCKER 1
 
 EXPOSE 80
 
-# TOOLS
-run apt-get install -y -q curl git wget
-run apt-get install -y docker-compose 
 
 #REPOS
 run wget -qO- https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
