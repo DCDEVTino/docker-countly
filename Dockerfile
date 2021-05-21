@@ -7,15 +7,20 @@ ENV INSIDE_DOCKER 1
 
 EXPOSE 80
 
-#SHIMS
-run   dpkg-divert --local --rename --add /sbin/initctl
-run   ln -s /bin/true /sbin/initctl
-
 # TOOLS
 run    apt-get install git
 run    apt-get install wget
 run    apt-get install unzip
 run    apt-get install docker-compose 
+
+#REPOS
+run    wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+
+#SHIMS
+run   dpkg-divert --local --rename --add /sbin/initctl
+run   ln -sf /bin/true /sbin/initctl
+
+
 
 ## MONGO
 run    mkdir -p /data/db
