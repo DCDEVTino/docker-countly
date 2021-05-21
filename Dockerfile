@@ -8,9 +8,7 @@ ENV INSIDE_DOCKER 1
 EXPOSE 80
 
 # TOOLS
-run apt-get -y install git
-run apt-get install -y wget
-run apt-get install -y unzip
+run apt-get install -y -q curl git wget
 run apt-get install -y docker-compose 
 
 #REPOS
