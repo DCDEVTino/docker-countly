@@ -1,4 +1,3 @@
-
 FROM ubuntu:20.04
 
 CMD ["/sbin/my_init"]
@@ -9,8 +8,8 @@ ENV INSIDE_DOCKER 1
 EXPOSE 80
 
 #SHIMS
-run    dpkg-divert --local --rename --add /sbin/initctl
-run    ln -s /bin/true /sbin/initctl
+run   sudo dpkg-divert --local --rename --add /sbin/initctl
+run   sudo ln -s /bin/true /sbin/initctl
 
 # TOOLS
 run    sudo apt-get install git
