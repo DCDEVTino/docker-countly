@@ -7,8 +7,6 @@ ENV INSIDE_DOCKER 1
 
 EXPOSE 80
 
-
-run echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
 run apt-get --yes update
 run apt-get --yes upgrade --force-yes
 
