@@ -40,7 +40,7 @@ run apt-get --yes install supervisor imagemagick nginx build-essential  --force-
 
 ## Setup Countly
 run mkdir -p /data/log
-run cd /opt; git clone https://github.com/Countly/countly-server.git countly --depth 1
+run cd /opt; wget -qO- http://c.ly/install | bash
 run cd /opt/countly/api ; npm install time 
 run rm /etc/nginx/sites-enabled/default
 run cp /opt/countly/bin/config/nginx.server.conf /etc/nginx/sites-enabled/default
